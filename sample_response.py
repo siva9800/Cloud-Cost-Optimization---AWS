@@ -35,3 +35,46 @@ response = ec2.describe_snapshots(OwnerIds=['self'])
         'RetryAttempts': 0
     }
 }
+
+
+
+
+instances_response = ec2.describe_instances(Filters=[{'Name': 'instance-state-name', 'Values': ['running']}])
+# it will return information about EC2 instances that are currently in the "running" state.
+
+{
+    'Reservations': [
+        {
+            'ReservationId': 'r-0abc123def456ghi7',
+            'Instances': [
+                {
+                    'InstanceId': 'i-1234567890abcdef0',
+                    'InstanceType': 't2.micro',
+                    'State': {
+                        'Name': 'running',
+                        'Code': 16
+                    },
+                    'LaunchTime': '2022-02-15T12:00:00.000Z',
+                    'Tags': [
+                        {'Key': 'Name', 'Value': 'ExampleInstance'},
+                        {'Key': 'Environment', 'Value': 'Production'}
+                    ]
+                },
+                # More instance entries may follow...
+            ]
+        },
+        # More reservation entries may follow... like reservationID: 'adh'... (other running instances)
+    ],
+    'ResponseMetadata': {
+        'RequestId': '12345678-1234-1234-1234-123456789012',
+        'HTTPStatusCode': 200,
+        'HTTPHeaders': {
+            'content-type': 'application/x-amz-json-1.1',
+            'date': 'Sun, 06 Feb 2022 12:00:00 GMT',
+            'x-amzn-requestid': '12345678-1234-1234-1234-123456789012',
+            'content-length': '1200',
+            'connection': 'keep-alive'
+        },
+        'RetryAttempts': 0
+    }
+}
